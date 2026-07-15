@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Account – Edutracker</title>
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #2d3748;
+            line-height: 1.7;
+            font-size: 16px;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 28px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .header .icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #e53e3e, #c53030);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 32px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 12px rgba(229, 62, 62, 0.3);
+        }
+
+        .header h1 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 4px;
+        }
+
+        .header .subtitle {
+            font-size: 14px;
+            color: #718096;
+        }
+
+        .warning-box {
+            background: #fff5f5;
+            border: 1px solid #fed7d7;
+            border-left: 4px solid #e53e3e;
+            padding: 16px 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 24px 0;
+        }
+
+        .warning-box p {
+            color: #c53030;
+            font-weight: 600;
+            margin-bottom: 0;
+            font-size: 14px;
+        }
+
+        .info-box {
+            background: #ebf8ff;
+            border: 1px solid #bee3f8;
+            border-left: 4px solid #3182ce;
+            padding: 16px 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 24px 0;
+        }
+
+        .info-box p {
+            color: #2b6cb0;
+            margin-bottom: 0;
+            font-size: 14px;
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a202c;
+            margin-top: 36px;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        h3 {
+            font-size: 17px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-top: 20px;
+            margin-bottom: 8px;
+        }
+
+        p {
+            margin-bottom: 14px;
+            color: #4a5568;
+        }
+
+        ul, ol {
+            margin-bottom: 14px;
+            padding-left: 24px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            color: #4a5568;
+        }
+
+        .step-list {
+            counter-reset: step-counter;
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .step-list li {
+            counter-increment: step-counter;
+            position: relative;
+            padding-left: 48px;
+            margin-bottom: 20px;
+        }
+
+        .step-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 32px;
+            height: 32px;
+            background: #3182ce;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .step-list li strong {
+            color: #1a202c;
+        }
+
+        .step-list li p {
+            margin-top: 4px;
+            margin-bottom: 0;
+            font-size: 14px;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+
+        .contact-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+
+        .contact-card .email {
+            font-size: 18px;
+            font-weight: 600;
+            color: #3182ce;
+            margin: 12px 0 8px;
+        }
+
+        .contact-card .email a {
+            color: #3182ce;
+            text-decoration: none;
+        }
+
+        .contact-card .email a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-card .note {
+            font-size: 13px;
+            color: #718096;
+            margin-top: 8px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 14px;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+        }
+
+        .data-table th, .data-table td {
+            text-align: left;
+            padding: 12px 16px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #4a5568;
+        }
+
+        .data-table th {
+            background: #f7fafc;
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-deleted {
+            background: #fed7d7;
+            color: #c53030;
+        }
+
+        footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 2px solid #e2e8f0;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 13px;
+            color: #a0aec0;
+        }
+
+        a {
+            color: #3182ce;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 24px 16px 60px;
+            }
+
+            .header h1 {
+                font-size: 22px;
+            }
+
+            h2 {
+                font-size: 18px;
+            }
+
+            .data-table {
+                font-size: 13px;
+            }
+
+            .data-table th, .data-table td {
+                padding: 10px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Header -->
+        <div class="header">
+            <div class="icon">&#128465;</div>
+            <h1>Delete Your Account</h1>
+            <p class="subtitle">Edutracker – Smart Tuition Management</p>
+        </div>
+
+        <!-- Warning -->
+        <div class="warning-box">
+            <p>&#9888; This action is permanent and cannot be undone. All your data will be permanently deleted.</p>
+        </div>
+
+        <!-- What Gets Deleted -->
+        <h2>1. What Data Will Be Deleted</h2>
+        <p>When you delete your Edutracker account, the following data is permanently removed from our servers and your device:</p>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Data Type</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Student Records</strong> – Names, phone numbers, notes, class info</td>
+                    <td><span class="badge badge-deleted">Deleted</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Batch Information</strong> – Batch names, schedules, student lists</td>
+                    <td><span class="badge badge-deleted">Deleted</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Payment History</strong> – Fee records, payment status, amounts</td>
+                    <td><span class="badge badge-deleted">Deleted</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Subscription Requests</strong> – UPI payment requests and approval status</td>
+                    <td><span class="badge badge-deleted">Deleted</span></td>
+                </tr>
+                <tr>
+                    <td><strong>App Settings</strong> – Preferences, onboarding status, local configuration</td>
+                    <td><span class="badge badge-deleted">Deleted</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Firebase Account</strong> – Your Google Sign-In authentication account</td>
+                    <td><span class="badge badge-deleted">Deleted</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- How to Delete -->
+        <h2>2. How to Delete Your Account</h2>
+
+        <h3>Method A: Delete from Within the App (Recommended)</h3>
+        <p>The easiest way to delete your account is directly from the Edutracker app:</p>
+
+        <ol class="step-list">
+            <li>
+                <strong>Open Edutracker</strong>
+                <p>Launch the app and make sure you are signed in.</p>
+            </li>
+            <li>
+                <strong>Tap Your Profile Icon</strong>
+                <p>Tap the profile icon in the top-right corner of the dashboard to open the profile menu.</p>
+            </li>
+            <li>
+                <strong>Tap "Delete Account"</strong>
+                <p>Scroll down and tap the red "Delete Account" button at the bottom of the profile menu.</p>
+            </li>
+            <li>
+                <strong>Confirm Deletion</strong>
+                <p>You will be asked to confirm. Tap "Delete Forever" to proceed. You may be asked to re-authenticate with your Google account for security.</p>
+            </li>
+            <li>
+                <strong>Account Deleted</strong>
+                <p>All your data will be permanently removed and you will be signed out automatically.</p>
+            </li>
+        </ol>
+
+        <h3>Method B: Request Deletion via Email</h3>
+        <p>If you no longer have access to the app, you can request account deletion by emailing us. Please include the email address associated with your Edutracker account.</p>
+
+        <div class="contact-card">
+            <p><strong>Send a deletion request to:</strong></p>
+            <div class="email">
+                <a href="mailto:privacy@pglive.dev?subject=Delete%20My%20Edutracker%20Account&body=Please%20delete%20my%20Edutracker%20account.%0A%0AEmail%20associated%20with%20account%3A%20[your%20email%20here]">privacy@pglive.dev</a>
+            </div>
+            <p class="note">We will process your request within 7 business days and send a confirmation email.</p>
+        </div>
+
+        <!-- What Happens After -->
+        <h2>3. What Happens After Deletion</h2>
+        <ul>
+            <li><strong>Immediate:</strong> Your account is disabled and you are signed out.</li>
+            <li><strong>Within 7 days:</strong> All Firestore data (students, batches, payments, subscription requests) is permanently deleted from Google Cloud servers.</li>
+            <li><strong>Within 30 days:</strong> Your Firebase Authentication account is permanently removed. Backup copies in our disaster recovery systems are also purged.</li>
+            <li><strong>Local data:</strong> All data stored locally on your device (Hive database) is cleared immediately upon deletion.</li>
+        </ul>
+
+        <!-- Important Notes -->
+        <h2>4. Important Notes</h2>
+        <ul>
+            <li>Account deletion is <strong>irreversible</strong>. Once deleted, your data cannot be recovered.</li>
+            <li>If you have an active premium subscription, it will be cancelled upon account deletion. No refunds are provided for unused subscription time.</li>
+            <li>You may need to <strong>re-authenticate</strong> with your Google account before deletion as a security measure.</li>
+            <li>If you are using a shared device, please ensure you <strong>sign out</strong> after deletion to prevent unauthorized access.</li>
+        </ul>
+
+        <!-- Contact -->
+        <h2>5. Questions or Concerns</h2>
+        <p>If you have any questions about account deletion or our data practices, please contact us:</p>
+
+        <div class="contact-card">
+            <p><strong>Developer:</strong> PG Live</p>
+            <div class="email">
+                <a href="mailto:privacy@pglive.dev">privacy@pglive.dev</a>
+            </div>
+            <p class="note">We aim to respond to all inquiries within 48 hours.</p>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2026 PG Live. All rights reserved.</p>
+            <p style="margin-top: 4px;">
+                <a href="https://prasantseditz.github.io/edutracker-privacy-policy/">Privacy Policy</a>
+                &nbsp;&middot;&nbsp;
+                <a href="mailto:privacy@pglive.dev">Contact Us</a>
+            </p>
+        </footer>
+
+    </div>
+</body>
+</html>
